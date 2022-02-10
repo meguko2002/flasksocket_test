@@ -5,7 +5,9 @@ from flask_socketio import SocketIO, emit
 app = Flask(__name__)
 app.secret_key = 'ABCDEFGH'
 app.config['SECRET_KEY'] = 'secret!'
-socketio = SocketIO(app, async_mode=None)
+app.config['DEBUG'] = True
+
+socketio = SocketIO(app, async_mode=None, logger=True, engineio_logger=True)
 
 
 @app.route('/')
@@ -20,4 +22,4 @@ def handleMessage(data):
 
 if __name__ == '__main__':
     # socketio.run(app, host='0.0.0.0', port=5000, debug=True)
-    socketio.run(app,  port=5000, debug=True)
+    socketio.run(app)
