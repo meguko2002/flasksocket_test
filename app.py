@@ -4,7 +4,7 @@ from flask_socketio import SocketIO, emit
 
 app = Flask(__name__)
 app.secret_key = 'ABCDEFGH'
-socketio = SocketIO(app, async_mode='gevent')
+socketio = SocketIO(app)
 
 
 @app.route('/')
@@ -12,10 +12,9 @@ def index():
     return render_template('index.html')
 
 
-@socketio.on('my event')
-def my_message(message):
-    print(message)
-    emit('message', {'msg':'hello client'},broadcast=True)
+@socketio.on("message")
+def handleMessage(data):
+    emit("new_message", data, broadcast=True)
 
 
 if __name__ == '__main__':
