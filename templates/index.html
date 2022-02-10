@@ -17,7 +17,7 @@
     crossorigin="anonymous"></script>
 <script>
 
-	const socket = io.connect('http://' + document.domain + ':' + location.port)
+    var socket = io.connect('http://' + document.domain + ':' + location.port + '/test');
 	function sendMessage () {
 		socket.emit("message",document.getElementById("chat-input").value)
 	}
