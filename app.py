@@ -1,8 +1,9 @@
-from flask import Flask, render_template, make_response, redirect
-from flask_socketio import SocketIO, send, emit
-import os
+# -*- coding: utf-8 -*-
+from flask import Flask, render_template
+from flask_socketio import SocketIO, emit
 
 app = Flask(__name__)
+app.secret_key = 'ABCDEFGH'
 socketio = SocketIO(app)
 
 
@@ -11,9 +12,10 @@ def index():
     return render_template('index.html')
 
 
-@socketio.on("message")
-def handleMessage(data):
-    emit("new_message", data, broadcast=True)
+@socketio.on('my event')
+def my_message(message):
+    print(message)
+    emit('message', {'msg':'hello client'},broadcast=True)
 
 
 if __name__ == '__main__':

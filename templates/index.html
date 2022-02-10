@@ -1,23 +1,44 @@
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE HTML>
+<html lang="ja">
+
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Socket-Test</title>
 </head>
+
 <body>
-<div id="chat"></div>
-<input id="chat-input" type="text"> <button onclick="sendMessage()">Send Message</button>
+    <div id="app">
+        <button v-on:click="entry">追加</button>
+        <p>[[  msg  ]]</p>
+    </div>
+</body>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 <script src="https://cdn.socket.io/4.4.0/socket.io.min.js"
     integrity="sha384-1fOn6VtTq3PWwfsOrk45LnYcGosJwzMHv+Xh/Jx5303FVOXzEnw0EpLv30mtjmlj"
     crossorigin="anonymous"></script>
 <script>
-	socket = io()
-	function sendMessage () {
-		socket.emit("message",document.getElementById("chat-input").value)
-	}
-	socket.on("new_message",(data)=>{
-		document.getElementById("chat").innerHTML+="<br>"+data;
-	})
+
+    const socket = io();
+    Vue.options.delimiters = ['[[', ']]'];
+    const app = new Vue({
+        el: '#app',
+        data: {
+            msg: "hi",
+        },
+        methods: {
+            entry: function () {
+                socket.emit('my event', { data: 'I\'m connected!' })
+            }
+        },
+        mounted: function () {
+            socket.on('message', (data)=> {
+                this.msg = data.msg
+            });
+        }
+    })
+
 </script>
-</body>
+
 </html>
