@@ -4,7 +4,8 @@ from flask_socketio import SocketIO, emit
 
 app = Flask(__name__)
 app.secret_key = 'ABCDEFGH'
-socketio = SocketIO(app)
+app.config['SECRET_KEY'] = 'secret!'
+socketio = SocketIO(app, async_mode=None)
 
 
 @app.route('/')
