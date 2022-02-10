@@ -17,7 +17,7 @@
     crossorigin="anonymous"></script>
 <script>
 
-	const socket = io()
+	const socket = io("https://jinrogmtest.herokuapp.com")
 	function sendMessage () {
 		socket.emit("message",document.getElementById("chat-input").value)
 	}
