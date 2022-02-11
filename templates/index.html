@@ -1,3 +1,10 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
 <input id="chat-input" type="text">
 <button onclick="sendMessage()">Send Message</button>
 <div id="chat"></div>
@@ -9,3 +16,5 @@
 	}
 	socket.on("new_message", (data) => document.getElementById("chat").innerHTML+= "<br>" + data)
 </script>
+</body>
+</html>
