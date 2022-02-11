@@ -10,7 +10,7 @@
 <body>
 <h1>ポコの独り言</h1>
 <p>世界中の人が見ることができるので、プライバシーに関わるな会話はNGだよ</p>
-<input id="chat-input" type="text">
+<input id="chat-input" type="text"  placeholder="ここに入力">
 <button onclick="sendMessage()">送信</button>
 
 <div id="chat"></div>
@@ -19,7 +19,8 @@
 
   const socket = io()
 	function sendMessage() {
-		socket.emit("message", document.getElementById("chat-input").value)
+	    socket.emit("message", document.getElementById("chat-input").value)
+		document.getElementById("chat-input").value = ""
 	}
 	socket.on("new_message", (data) => document.getElementById("chat").innerHTML+= "<br>" + data)
 </script>
