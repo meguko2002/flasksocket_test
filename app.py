@@ -7,7 +7,7 @@ socketio = SocketIO(app, cors_allowed_origins="*")
 
 @app.route("/")
 def index():
-    return send_file("templates/index.html")
+    return send_file("index.html")
 
 
 @socketio.on("message")
